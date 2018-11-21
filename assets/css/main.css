@@ -1,0 +1,118 @@
+body { 
+    background-image: url("https://www.maxpixel.net/static/photo/2x/Wooden-Desk-Background-Wood-Desktop-Table-Aerial-3271749.jpg"); 
+    /* Attribution: https://www.maxpixel.net/photo-3271749 */
+    /* background-image: url("assets/images/table.jpeg");  */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.card {
+    width: 300px;
+    box-shadow: 2px 2px 10px black;
+    border-radius: 3px;
+    margin: 20px;
+    background: rgb(245, 245, 245);
+    font-family: 'Permanent Marker', cursive;
+    display: inline-block;
+}
+.card:hover {
+    transition: transform 1s ease;
+}
+.gif {
+    width: 90%;
+    margin: 5%;
+}
+.card-body {
+    height: 50px;
+    background: white;
+}
+.polaroid-image {
+    background: black;
+    width: 350px;
+    height: 350px;
+    border: 10px solid rgb(245, 245, 245);;
+}
+.polaroid {
+    border: 1px solid black;
+    box-shadow: 2px 2px 20px black;
+    border-radius: 2px;
+    width: 352px;
+    background: white;
+}
+#new-button-input {
+    margin: 10px;
+    padding: 10px;
+    width: 95%;
+    
+}
+#submit-button {
+    font-family: 'Lobster', cursive;
+    margin: 15px;
+    padding-bottom: 15px;
+    width: 300px;
+    box-shadow: 1px 1px 10px black;
+    background-color: #ed8cb9;
+    color: white;
+    text-shadow: 2px 2px 3px black;
+    text-align: center; 
+}
+.polaroid-gif {
+    width: 100%;
+    margin: auto;
+    -webkit-animation: mymove 7s ; 
+    animation: mymove 7s ;
+}
+@-webkit-keyframes mymove {
+    5% {
+        -webkit-filter: contrast(20%) brightness(2850%); 
+        filter: contrast(20%) brightness(2850%);
+    }
+}
+
+#header img {
+float: left;
+width: 100px;
+height: 100px;
+}
+
+#header h1 {
+font-family: 'Lobster', cursive;
+color: white;
+text-shadow: 2px 2px #000000;
+position: relative;
+top: 18px;
+left: 10px;
+}
+#instructions {
+    color: white;
+    text-align: left;
+    font-family: 'Playball', sans-serif;
+    font-size: 18px;
+}
+#instructions span {
+    font-family: sans-serif;
+    font-size: 0.8em;
+}
+.topic-button {
+    background: white;
+    color: white;
+    margin: 10px;
+    padding: 0;
+    box-shadow: 2px 2px 6px #000000;
+}
+.button-caption {
+    font-family: 'Permanent Marker', cursive;
+    color: black;
+    background: white;
+    width: 100%;
+    margin: 0;
+    padding: 1px 6px;
+}
+.black-space {
+    padding: 20px 10px;
+    margin: 3px;
+    background-color: black;
+}
+.sidebar {
+    float: left;
+}
