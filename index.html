@@ -61,7 +61,7 @@
         font-family: 'Lobster', cursive;
         margin: 5% auto;
         padding: 10px;
-        width: 80%;
+        width: 300px;
         box-shadow: 2px 2px 10px black;
     }
     .polaroid-gif {
@@ -76,24 +76,54 @@
             filter: contrast(20%) brightness(2850%);
         }
     }
-    #header-area {
-        font-family: 'Lobster', cursive;
-        text-shadow: 2px 2px #000000;
-        display: inline-block;
-        color: white;
+    
+    #header img {
+    float: left;
+    width: 100px;
+    height: 100px;
+    }
+
+    #header h1 {
+    font-family: 'Lobster', cursive;
+    color: white;
+    text-shadow: 2px 2px #000000;
+    position: relative;
+    top: 18px;
+    left: 10px;
     }
     #instructions {
         color: white;
         text-align: left;
+        font-family: 'Playball', sans-serif;
+        font-size: 18px;
+    }
+    #instructions span {
+        font-family: sans-serif;
+        font-size: 0.8em;
     }
     .topic-button {
-        background: black;
+        background: white;
         color: white;
-        border: 5px solid white;
         margin: 10px;
-        padding-top: 30px;
+        padding: 0;
+        box-shadow: 2px 2px 6px #000000;
     }
+    .button-caption {
+        font-family: 'Permanent Marker', cursive;
+        color: black;
+        background: white;
+        width: 100%;
+        margin: 0;
+        padding: 1px 6px;
+    }
+    .black-space {
+        padding: 20px 10px;
+        margin: 3px;
+        background-color: black;
+    }
+
 </style>
+
 
 <body>
 
@@ -101,11 +131,9 @@
         <div class="row" >
             <div class="col-lg-8" id="buttonDisplay">
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-4" id="header">
                 <img src="assets/images/polaroid.png" alt="Polaroid" width="100px">
-            </div>
-            <div class="col-lg-3" id="header-area">
-                <h2>Giffy Polaroids</h2>  
+                <h1>Giffy Polaroids</h1>  
             </div>
         </div>
         <div class="row">
@@ -123,11 +151,10 @@
                     Snap & Shake
                 </button>
                 <div id="instructions">
-                    <ol>
-                        <li>Click a button to view gifs</li>
-                        <li>Start and stop gifs by clicking</li>
-                        <li>Submit your own gif above</li>
-                        <li>Click your new button to view more gifs</li>
+                    <ol>                        
+                        <li><span>Enter a topic above</span></li>
+                        <li><span>Start and stop gifs by clicking</span> </li>
+                        <li><span>Click your new button to view more gifs</span></li>
                     </ol>
                 </div>
             </div>
@@ -141,16 +168,22 @@
         $( document ).ready(function() {
 
             // Initial buttons to be displayed
-            var topics = ["Family", "San Francisco", "Computer"];
+            var topics = ["Family", "Texas", "Computer"];
 
             // Loop through topics array to create buttons
             function updateButtons() {
                 $("#buttonDisplay").empty();
                 for (var i = 0; i < topics.length; i++) {
-                // create new button
-                var newButton = $("<button>").data("name", topics[i]).addClass("topic-button").text(topics[i]);
-                // append it to the display
-                $("#buttonDisplay").append(newButton);
+                    // create new caption
+                    var newCaption = $("<div>").text(topics[i]).addClass("button-caption");
+                    // create new black space
+                    var newBlackSpace = $("<div>").addClass("black-space");
+                    // create new button
+                    var newButton = $("<button>").data("name", topics[i]).addClass("topic-button");
+                    // append caption to button
+                    newButton.append(newBlackSpace, newCaption);
+                    // append it to the display
+                    $("#buttonDisplay").append(newButton);
                 };
             };
             
@@ -159,7 +192,7 @@
                 // empty gif display
                 $("#gifDisplay").empty();
                 // create query URL from search term
-                queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Yi0ZBLUqIQY8KsEeCmFhpk0E7l2qD94u&limit=10&q=" + $(this).data("name");
+                queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Yi0ZBLUqIQY8KsEeCmFhpk0E7l2qD94u&limit=11&q=" + $(this).data("name");
                 // AJAX call
                 $.ajax({
                     url: queryURL,
@@ -167,7 +200,7 @@
                 }).then(function (response) {
                     console.log(response.data);
                     // for each item in response
-                    for (var i = 0; i<10; i++) {
+                    for (var i = 1; i<11; i++) {
                         // select new card elements 
                         var newCard = $("<div>").addClass("card text-center");
                         var newCardBody = $("<div>").addClass("card-body");
@@ -207,6 +240,9 @@
                 // if it's not empty
                 if ($("#new-button-input").val()) {
                     console.log($("#new-button-input").val());
+                    // save query term to local storage
+                    
+                    // Modify input placeholder text 
                     $("#new-button-input").attr("placeholder", "Click new " + $("#new-button-input").val() + " button for more!");
                     // Display first result in polaroid
                     queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Yi0ZBLUqIQY8KsEeCmFhpk0E7l2qD94u&limit=1&q=" + $("#new-button-input").val();
@@ -237,13 +273,13 @@
         });
 
 
-    // Align polaroid center on mouse hover
+    
 
-    // ### Bonus Goals
-    // 1. Ensure your app is fully mobile responsive.
-    // 6. Allow users to add their favorite gifs to a `favorites` section.
-    //    * This should persist even when they select or add a new topic.
-    //    * If you are looking for a major challenge, look into making this section persist even when the page is reloaded
+    // ### To-Dos ###
+        // Ensure mobile responsiveness
+        // Align polaroid center on mouse hover
+        // Allow users to save query terms and auto-generate on reload
+        // Allow users to add their favorite gifs to a `favorites` section.
 
     </script>
 
