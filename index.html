@@ -11,11 +11,12 @@
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 </head>
 <style>
-    body {
-        background-image: url("https://www.maxpixel.net/static/photo/2x/Wooden-Desk-Background-Wood-Desktop-Table-Aerial-3271749.jpg");
+    body { 
+        background: url("https://www.maxpixel.net/static/photo/2x/Wooden-Desk-Background-Wood-Desktop-Table-Aerial-3271749.jpg"); 
         /* Attribution: https://www.maxpixel.net/photo-3271749 */
         background-size: cover;
         background-repeat: no-repeat;
+        background-attachment: fixed;
     }
     .card {
         width: 300px;
@@ -23,6 +24,7 @@
         margin: 20px;
         background: white;
         font-family: 'Permanent Marker', cursive;
+        display: inline-block;
     }
     .gif {
         width: 90%;
@@ -57,10 +59,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8" id="gifDisplay">
+            <div class="col-lg-9" id="gifDisplay">
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="polaroid">
                     <div class="polaroid-image"></div>
                     <input class="form-control" id="new-button-input" type="text" placeholder="Caption your own photos!" height="100px">
@@ -104,7 +106,7 @@
                 }).then(function (response) {
                     console.log(response.data);
                     // for each item in response
-                    for (var i = 0; i<4; i++) {
+                    for (var i = 0; i<10; i++) {
                         // select new card elements 
                         var newCard = $("<div>").addClass("card text-center");
                         var newCardBody = $("<div>").addClass("card-body");
