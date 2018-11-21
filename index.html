@@ -176,18 +176,19 @@
         // Topics to be displayed in initial buttons
         $( document ).ready(function() {
 
-            // get buttons from previous queries
-            // var list = JSON.parse(localStorage.getItem("queryList"));
-            // if (!Array.isArray(list)) {
-            //     list = [];
-            // };
-            // console.log(list);
+            // get list of buttons from previous queries
+            var list = JSON.parse(localStorage.getItem("queryList"));
+            // if it's empty, set list to an empty array
+            if (!Array.isArray(list)) {
+                list = [];
+            };
+            console.log(list);
 
             // Initial buttons to be displayed
             var topics = ["Family", "Texas", "Computer"];
 
             // Combine prior queries with hardcoded ones
-            // topics = topics.concat(list)
+            topics = topics.concat(list);
 
             // Loop through topics array to create buttons
             function updateButtons() {
@@ -260,12 +261,23 @@
                 if ($("#new-button-input").val()) {
                     var inputValue = $("#new-button-input").val();
                     console.log(inputValue);
-                    // save query term to local storage
-                    // var storageList = JSON.stringify(localStorage.getItem("querylist"));
-                    // console.log(typeof storageList);
-                    // storageList.push(storageList);
-                    // console.log(typeof storageList);
-                    // Modify input placeholder text 
+
+                    // Logic for local storage
+                    // When the submit button is clicked
+                        // GET string from local storage 
+                        // JSON.parse() turns it into a list
+                        var storageList = JSON.parse(localStorage.getItem("queryList"));
+
+                        // If there are no values, set storageList to an empty array
+                        if (!Array.isArray(storageList)) {
+                            storageList = [];
+                        };
+                        // Push submit.val() in to the list
+                        list.push(inputValue);
+                        // JSON.stringify turns it into a string
+                        // SET local storage again
+                        localStorage.setItem("queryList", JSON.stringify(list));
+
                     $("#new-button-input").attr("placeholder", "Click new " + inputValue + " button for more!");
                     // Display first result in polaroid
                     queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Yi0ZBLUqIQY8KsEeCmFhpk0E7l2qD94u&limit=1&q=" + inputValue;
@@ -294,8 +306,6 @@
 
             updateButtons();
         });
-
-
     
 
     // ### To-Dos ###
