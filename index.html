@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/main.css" /> -->
     <!-- <script src="assets/main.js"></script> -->
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Permanent+Marker|Playball" rel="stylesheet">
 </head>
 <style>
     body { 
@@ -20,14 +20,14 @@
     }
     .card {
         width: 300px;
-        box-shadow: 2px 2px 10px grey;
+        box-shadow: 2px 2px 10px black;
+        border-radius: 3px;
         margin: 20px;
-        background: white;
+        background: rgb(245, 245, 245);
         font-family: 'Permanent Marker', cursive;
         display: inline-block;
     }
     .card:hover {
-        background: red;
         transition: transform 1s ease;
     }
     .gif {
@@ -36,12 +36,13 @@
     }
     .card-body {
         height: 50px;
+        background: white;
     }
     .polaroid-image {
         background: black;
         width: 350px;
         height: 350px;
-        border: 10px solid white;
+        border: 10px solid rgb(245, 245, 245);;
     }
     .polaroid {
         border: 1px solid black;
@@ -57,6 +58,7 @@
         
     }
     #submit-button {
+        font-family: 'Lobster', cursive;
         margin: 5% auto;
         padding: 10px;
         width: 80%;
@@ -74,22 +76,43 @@
             filter: contrast(20%) brightness(2850%);
         }
     }
-
+    #header-area {
+        font-family: 'Lobster', cursive;
+        text-shadow: 2px 2px #000000;
+        display: inline-block;
+        color: white;
+    }
+    #instructions {
+        color: white;
+        text-align: left;
+    }
+    .topic-button {
+        background: black;
+        color: white;
+        border: 5px solid white;
+        margin: 10px;
+        padding-top: 30px;
+    }
 </style>
 
 <body>
 
     <div class="container">
         <div class="row" >
-            <div class="col-lg-12" id="buttonDisplay">
-                
+            <div class="col-lg-8" id="buttonDisplay">
+            </div>
+            <div class="col-lg-1">
+                <img src="assets/images/polaroid.png" alt="Polaroid" width="100px">
+            </div>
+            <div class="col-lg-3" id="header-area">
+                <h2>Giffy Polaroids</h2>  
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-9" id="gifDisplay">
+            <div class="col-lg-8" id="gifDisplay">
 
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4 text-center">
                 <div class="polaroid">
                     <div class="polaroid-image"></div>
                     <input class="form-control" id="new-button-input" type="text" placeholder="Caption your own photos!" height="100px">
@@ -97,8 +120,16 @@
                 
                 <button class="btn btn-default" id="submit-button" type="submit">
                     <img src="assets/images/polaroid.png" alt="Polaroid" width="30%">
-                    Snap & shake
+                    Snap & Shake
                 </button>
+                <div id="instructions">
+                    <ol>
+                        <li>Click a button to view gifs</li>
+                        <li>Start and stop gifs by clicking</li>
+                        <li>Submit your own gif above</li>
+                        <li>Click your new button to view more gifs</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
@@ -110,7 +141,7 @@
         $( document ).ready(function() {
 
             // Initial buttons to be displayed
-            var topics = ["Family", "Awkward Family", "Kids"];
+            var topics = ["Family", "San Francisco", "Computer"];
 
             // Loop through topics array to create buttons
             function updateButtons() {
@@ -175,6 +206,8 @@
                 event.preventDefault();
                 // if it's not empty
                 if ($("#new-button-input").val()) {
+                    console.log($("#new-button-input").val());
+                    $("#new-button-input").attr("placeholder", "Click new " + $("#new-button-input").val() + " button for more!");
                     // Display first result in polaroid
                     queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Yi0ZBLUqIQY8KsEeCmFhpk0E7l2qD94u&limit=1&q=" + $("#new-button-input").val();
                     // AJAX call
