@@ -8,19 +8,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/main.css" /> -->
     <!-- <script src="assets/main.js"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 </head>
 <style>
+    body {
+        background-image: url("https://www.maxpixel.net/static/photo/2x/Wooden-Desk-Background-Wood-Desktop-Table-Aerial-3271749.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
     .card {
         width: 300px;
-        border: 2px solid grey;
+        box-shadow: 2px 2px 10px grey;
         margin: 20px;
+        background: white;
+        font-family: 'Permanent Marker', cursive;
     }
     .gif {
-        width: 80%;
+        width: 90%;
         margin: 5%;
     }
     .card-body {
         height: 50px;
+    }
+    .polaroid-image {
+        background: black;
+        width: 350px;
+        height: 350px;
+        border: 10px solid white;
+    }
+    .polaroid {
+        border: 1px solid black;
+        width: 352px;
+        background: white;
+    }
+    #new-button-input {
+        margin: 10px;
+        width: 95%;
     }
 </style>
 
@@ -29,7 +52,7 @@
     <div class="container">
         <div class="row" >
             <div class="col-lg-12" id="buttonDisplay">
-
+                
             </div>
         </div>
         <div class="row">
@@ -37,13 +60,12 @@
 
             </div>
             <div class="col-lg-4">
-                <form role="form">
-                    <div class="form-group row">
-                        <label for="new-button-input">Add a new button</label>
-                        <input class="form-control" id="new-button-input" type="text">
-                    </div>
-                    <button class="btn btn-default" id="submit-button" type="submit">Submit</button>
-                </form>
+                <div class="polaroid">
+                    <div class="polaroid-image"></div>
+                    <input class="form-control" id="new-button-input" type="text" placeholder="Caption your own photos!" height="100px">
+                </div>
+                <img src="assets/images/polaroid.png" alt="Polaroid" width="30%">
+                <button class="btn btn-default" id="submit-button" type="submit">Snap & shake</button>
             </div>
         </div>
     </div>
@@ -77,7 +99,7 @@
             }).then(function (response) {
                 console.log(response.data);
                 // for each item in response
-                for (var i = 0; i<10; i++) {
+                for (var i = 0; i<4; i++) {
                     // select new card elements 
                     var newCard = $("<div>").addClass("card text-center");
                     var newCardBody = $("<div>").addClass("card-body");
@@ -112,8 +134,10 @@
         // Functionality to add new buttons to starting topics
         $(document).on("click", "#submit-button", function() {
             event.preventDefault();
-            topics.push($("#new-button-input").val());
-            updateButtons();
+            if ($("#new-button-input").val()) {
+                topics.push($("#new-button-input").val());
+                updateButtons();
+            };
         });
         updateButtons();
     </script>
