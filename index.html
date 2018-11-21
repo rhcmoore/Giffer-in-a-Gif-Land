@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Giffer in a Gif Land</title>
+    <title>Giffy Polaroids</title>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/main.css" /> -->
@@ -59,10 +59,14 @@
     }
     #submit-button {
         font-family: 'Lobster', cursive;
-        margin: 5% auto;
-        padding: 10px;
+        margin: 15px;
+        padding-bottom: 15px;
         width: 300px;
-        box-shadow: 2px 2px 10px black;
+        box-shadow: 1px 1px 10px black;
+        background-color: pink;
+        color: white;
+        text-shadow: 2px 2px 3px black;
+        text-align: center; 
     }
     .polaroid-gif {
         width: 100%;
@@ -121,6 +125,9 @@
         margin: 3px;
         background-color: black;
     }
+    .sidebar {
+        float: left;
+    }
 
 </style>
 
@@ -141,22 +148,24 @@
 
             </div>
             <div class="col-lg-4 text-center">
-                <div class="polaroid">
-                    <div class="polaroid-image"></div>
-                    <input class="form-control" id="new-button-input" type="text" placeholder="Caption your own photos!" height="100px">
-                </div>
-                
-                <button class="btn btn-default" id="submit-button" type="submit">
-                    <img src="assets/images/polaroid.png" alt="Polaroid" width="30%">
-                    Snap & Shake
-                </button>
-                <div id="instructions">
-                    <ol>                        
-                        <li><span>Enter a topic above</span></li>
-                        <li><span>Start and stop gifs by clicking</span> </li>
-                        <li><span>Click your new button to view more gifs</span></li>
-                    </ol>
-                </div>
+                <section class="sidebar">
+                    <div class="polaroid">
+                        <div class="polaroid-image"></div>
+                        <input class="form-control" id="new-button-input" type="text" placeholder="Caption your own photos!" height="100px">
+                    </div>
+                    
+                    <button class="btn btn-default" id="submit-button" type="submit">
+                        <!-- <img src="assets/images/polaroid.png" alt="Polaroid" width="30%"> -->
+                        <h3>Snap & Shake</h3> 
+                    </button>
+                    <div id="instructions">
+                        <ol>                        
+                            <li><span>Enter a topic for a new gif</span></li>
+                            <li><span>Start and stop gifs by clicking</span> </li>
+                            <li><span>Click your new button to view more gifs</span></li>
+                        </ol>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -167,8 +176,18 @@
         // Topics to be displayed in initial buttons
         $( document ).ready(function() {
 
+            // get buttons from previous queries
+            // var list = JSON.parse(localStorage.getItem("queryList"));
+            // if (!Array.isArray(list)) {
+            //     list = [];
+            // };
+            // console.log(list);
+
             // Initial buttons to be displayed
             var topics = ["Family", "Texas", "Computer"];
+
+            // Combine prior queries with hardcoded ones
+            // topics = topics.concat(list)
 
             // Loop through topics array to create buttons
             function updateButtons() {
@@ -219,7 +238,7 @@
                 });
             });
 
-            // Handling clicks on images/gifs in the display area
+            // Handling start/stop animation on clicks of images/gifs
             $(document).on("click", ".gif", function() {
                 // get the image state (still or animate)
                 var state = $(this).data("state");
@@ -239,13 +258,17 @@
                 event.preventDefault();
                 // if it's not empty
                 if ($("#new-button-input").val()) {
-                    console.log($("#new-button-input").val());
+                    var inputValue = $("#new-button-input").val();
+                    console.log(inputValue);
                     // save query term to local storage
-                    
+                    // var storageList = JSON.stringify(localStorage.getItem("querylist"));
+                    // console.log(typeof storageList);
+                    // storageList.push(storageList);
+                    // console.log(typeof storageList);
                     // Modify input placeholder text 
-                    $("#new-button-input").attr("placeholder", "Click new " + $("#new-button-input").val() + " button for more!");
+                    $("#new-button-input").attr("placeholder", "Click new " + inputValue + " button for more!");
                     // Display first result in polaroid
-                    queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Yi0ZBLUqIQY8KsEeCmFhpk0E7l2qD94u&limit=1&q=" + $("#new-button-input").val();
+                    queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Yi0ZBLUqIQY8KsEeCmFhpk0E7l2qD94u&limit=1&q=" + inputValue;
                     // AJAX call
                     $.ajax({
                         url: queryURL,
