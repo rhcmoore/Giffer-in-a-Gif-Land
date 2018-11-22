@@ -61,11 +61,17 @@ body {
     margin: auto;
     -webkit-animation: mymove 7s ; 
     animation: mymove 7s ;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
 }
 @-webkit-keyframes mymove {
-    5% {
-        -webkit-filter: contrast(20%) brightness(2850%); 
-        filter: contrast(20%) brightness(2850%);
+    1% {
+        -webkit-filter: contrast(2000%) brightness(-250%); 
+        filter: contrast(2000%) brightness(-250%);
+    }
+    99% {
+        -webkit-filter: contrast(-2000%) brightness(250%); 
+        filter: contrast(-2000%) brightness(250%);
     }
 }
 

@@ -131,3 +131,9 @@ $( document ).ready(function() {
 
     updateButtons();
 });
+
+// ### To-Dos ###
+        // Ensure mobile responsiveness
+        // Align polaroid center on mouse hover
+        // Allow users to save query terms and auto-generate on reload
+        // Allow users to add their favorite gifs to a `favorites` section.
