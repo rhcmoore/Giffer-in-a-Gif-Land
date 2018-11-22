@@ -1,7 +1,7 @@
 body { 
     /* background-image: url("https://www.maxpixel.net/static/photo/2x/Wooden-Desk-Background-Wood-Desktop-Table-Aerial-3271749.jpg");  */
     /* Attribution: https://www.maxpixel.net/photo-3271749 */
-    background-image: url("assets/images/desk.jpg"); 
+    background-image: url("../images/desk.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
