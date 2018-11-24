@@ -1,7 +1,9 @@
 # Giffy Polaroids
 
-<img src="assets/images/demo.png"
-    style="float: left; margin-right: 10px;" />
+<video width="100%"  controls>
+  <source src="assets/videos/demo_video.webm">
+Your browser does not support the video tag.
+</video>
 
 What's the only thing better than Polaroid pictures? Gif polaroids!
 
